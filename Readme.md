@@ -1,5 +1,8 @@
 ### Epoch
 
+
+Stupid date wrapper. Useless if you know how to use `date`.
+
 ```
 Usage: epoch [options] [date]
 
