@@ -14,7 +14,7 @@ parser = OptionParser.new do |opts|
   opts.separator ""
   opts.separator "Options:"
 
-  opts.on("-u", "--unix", "Prints the current time or the argiment to unix time (seconds since 1/1/70)") do |unix|
+  opts.on("-u", "--unix", "Prints the current time or the argument to unix time (seconds since 1/1/70)") do |unix|
     options[:unix] = true
   end
 
