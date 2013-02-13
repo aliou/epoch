@@ -30,3 +30,9 @@ parser = OptionParser.new do |opts|
 end
 
 parser.parse!
+
+format = options[:human] ? "%c" : "%s"
+date = *ARGV
+d = date.first ? DateTime.parse(date.first) : DateTime.now
+
+puts d.strftime(format)
