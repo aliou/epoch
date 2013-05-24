@@ -1,11 +1,10 @@
 #!/usr/bin/env ruby
 
 require 'optparse'
-require 'date'
+require 'chronic'
 
 options = {
   :unix => true,
-  :human => false
 }
 
 parser = OptionParser.new do |opts|
@@ -19,7 +18,6 @@ parser = OptionParser.new do |opts|
   end
 
   opts.on("-h", "--human", "Prints the current time in human form") do |human|
-    options[:human] = true
     options[:unix] = false
   end
 
@@ -31,8 +29,12 @@ end
 
 parser.parse!
 
-format = options[:human] ? "%c" : "%s"
-date = *ARGV
-d = date.first ? DateTime.parse(date.first) : DateTime.now
+if options[:unix]
+  date = (ARGV.empty?) ? DateTime.now : Chronic.parse((ARGV.join " "), :context => :past)
+  fmt = "%s"
+else
+  date = (ARGV.empty?) ? DateTime.now : DateTime.strptime(ARGV.first, "%s")
+  fmt = "%+"
+end
 
-puts d.strftime(format)
+puts date.strftime(fmt)
